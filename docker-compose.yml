@@ -1,0 +1,55 @@
+version: '3'
+services:
+    # dot_mariadb:
+    #     image: mariadb:latest
+    #     ports:
+    #         - '${DB_PORT:-3306}:3306'
+    #     restart: unless-stopped
+    #     environment:
+    #         MYSQL_DATABASE: '${DB_DATABASE}'
+    #         MYSQL_USER: '${DB_USERNAME}'
+    #         MYSQL_PASSWORD: '${DB_PASSWORD}'
+    #         MYSQL_ROOT_PASSWORD: 'root'
+    #     networks:
+    #         - dotnet
+    #     volumes:
+    #         - 'dotnet-mysql:/var/lib/mysql'
+    #         - './storage/app/public/data:/docker-entrypoint-initdb.d:ro'
+
+    dot_redis:
+        image: 'redis:alpine'
+        ports:
+            - '${REDIS_PORT:-6379}:6379'
+        volumes:
+            - 'dotnet-redis:/data'
+        networks:
+            - dotnet
+        healthcheck:
+            test:
+                - CMD
+                - redis-cli
+                - ping
+            retries: 3
+            timeout: 5s
+    postgres:
+        image: postgres:latest
+        environment:
+            POSTGRES_DB: ${POSTGRES_DB}
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        ports:
+          - '${POSTGRES_PORT:-5432}:5432'
+        volumes:
+          - dotnet-postgres:/var/lib/postgresql/data
+        networks:
+          - dotnet
+
+networks:
+    dotnet:
+        driver: bridge
+
+volumes:
+    dotnet-postgres:
+        driver: local
+    dotnet-redis:
+        driver: local
