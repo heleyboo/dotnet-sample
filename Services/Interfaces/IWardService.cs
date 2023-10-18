@@ -4,5 +4,5 @@ namespace webapi.Services.Interfaces;
 
 public interface IWardService
 {
-    public Task<List<Ward>> getWardsByDistrictCode(string districtCode);
+    public Task<List<Ward>> GetWardsByDistrictCode(string districtCode);
 }

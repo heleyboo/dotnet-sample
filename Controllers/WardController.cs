@@ -19,9 +19,10 @@ public class WardController : ControllerBase
     }
 
     [HttpGet("/wards")]
-    public async Task<List<Ward>> getWards()
+    public async Task<List<Ward>> GetWards([FromQuery(Name = "districtCode")] string districtCode)
     {
-        return await _wardService.getWardsByDistrictCode("773");
+        _logger.LogInformation(districtCode);
+        return await _wardService.GetWardsByDistrictCode(districtCode);
     }
     
 }

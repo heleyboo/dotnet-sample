@@ -14,7 +14,7 @@ public class WardService: IWardService
         _context = context;
     }
     
-    public async Task<List<Ward>> getWardsByDistrictCode(string districtCode)
+    public async Task<List<Ward>> GetWardsByDistrictCode(string districtCode)
     {
         return await _context.Wards.Where(s => s.DistrictCode == districtCode).ToListAsync();
     }
