@@ -7624,19 +7624,19 @@
     ]
   },
   "packageFolders": {
-    "/home/minh/.nuget/packages/": {}
+    "/home/minhanh/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/minh/Desktop/projects/netcore/dotnet-sample/webapi.csproj",
+      "projectUniqueName": "/home/minhanh/Desktop/projects/netcore/webapi/webapi.csproj",
       "projectName": "webapi",
-      "projectPath": "/home/minh/Desktop/projects/netcore/dotnet-sample/webapi.csproj",
-      "packagesPath": "/home/minh/.nuget/packages/",
-      "outputPath": "/home/minh/Desktop/projects/netcore/dotnet-sample/obj/",
+      "projectPath": "/home/minhanh/Desktop/projects/netcore/webapi/webapi.csproj",
+      "packagesPath": "/home/minhanh/.nuget/packages/",
+      "outputPath": "/home/minhanh/Desktop/projects/netcore/webapi/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/minh/.nuget/NuGet/NuGet.Config"
+        "/home/minhanh/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -7706,7 +7706,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/minh/.dotnet/sdk/7.0.402/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/home/minhanh/.dotnet/sdk/6.0.415/RuntimeIdentifierGraph.json"
       }
     }
   }

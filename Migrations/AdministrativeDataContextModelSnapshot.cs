@@ -25,237 +25,279 @@ namespace webapi.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
+                        .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CodeName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("code_name");
 
                     b.Property<string>("CodeNameEn")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("code_name_en");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("name");
 
                     b.Property<string>("NameEn")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("name_en");
 
                     b.HasKey("Id");
 
-                    b.ToTable("administrative_regions");
+                    b.ToTable("administrative_regions", (string)null);
                 });
 
             modelBuilder.Entity("webapi.Models.VietnameseAdministrativeUnits.AdministrativeUnit", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
+                        .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CodeName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("code_name");
 
                     b.Property<string>("CodeNameEn")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("code_name_en");
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("full_name");
 
                     b.Property<string>("FullNameEn")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("full_name_en");
 
                     b.Property<string>("ShortName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("short_name");
 
                     b.Property<string>("ShortNameEn")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("short_name_en");
 
                     b.HasKey("Id");
 
-                    b.ToTable("administrative_units");
+                    b.ToTable("administrative_units", (string)null);
                 });
 
             modelBuilder.Entity("webapi.Models.VietnameseAdministrativeUnits.District", b =>
                 {
                     b.Property<string>("Code")
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("code");
 
                     b.Property<int>("AdministrativeUnitId")
                         .HasColumnType("integer")
                         .HasColumnName("administrative_unit_id");
 
+                    b.Property<int>("AdministrativeUnitId1")
+                        .HasColumnType("integer");
+
                     b.Property<string>("CodeName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("code_name");
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("full_name");
 
                     b.Property<string>("FullNameEn")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("full_name_en");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("name");
 
                     b.Property<string>("NameEn")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("name_en");
 
                     b.Property<string>("ProvinceCode")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("province_code");
+
+                    b.Property<string>("ProvinceCode1")
+                        .IsRequired()
+                        .HasColumnType("varchar");
 
                     b.HasKey("Code");
 
                     b.HasIndex("AdministrativeUnitId");
 
+                    b.HasIndex("AdministrativeUnitId1");
+
                     b.HasIndex("ProvinceCode");
 
-                    b.ToTable("districts");
+                    b.HasIndex("ProvinceCode1");
+
+                    b.ToTable("districts", (string)null);
                 });
 
             modelBuilder.Entity("webapi.Models.VietnameseAdministrativeUnits.Province", b =>
                 {
                     b.Property<string>("Code")
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("code");
 
                     b.Property<int>("AdministrativeRegionId")
                         .HasColumnType("integer")
                         .HasColumnName("administrative_region_id");
 
+                    b.Property<int>("AdministrativeRegionId1")
+                        .HasColumnType("integer");
+
                     b.Property<int>("AdministrativeUnitId")
                         .HasColumnType("integer")
                         .HasColumnName("administrative_unit_id");
 
+                    b.Property<int>("AdministrativeUnitId1")
+                        .HasColumnType("integer");
+
                     b.Property<string>("CodeName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("code_name");
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("full_name");
 
                     b.Property<string>("FullNameEn")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("full_name_en");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("name");
 
                     b.Property<string>("NameEn")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("name_en");
 
                     b.HasKey("Code");
 
                     b.HasIndex("AdministrativeRegionId");
 
+                    b.HasIndex("AdministrativeRegionId1");
+
                     b.HasIndex("AdministrativeUnitId");
 
-                    b.ToTable("provinces");
+                    b.HasIndex("AdministrativeUnitId1");
+
+                    b.ToTable("provinces", (string)null);
                 });
 
             modelBuilder.Entity("webapi.Models.VietnameseAdministrativeUnits.Ward", b =>
                 {
                     b.Property<string>("Code")
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("code");
 
                     b.Property<int>("AdministrativeUnitId")
                         .HasColumnType("integer")
                         .HasColumnName("administrative_unit_id");
 
+                    b.Property<int>("AdministrativeUnitId1")
+                        .HasColumnType("integer");
+
                     b.Property<string>("CodeName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("code_name");
 
                     b.Property<string>("DistrictCode")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("district_code");
+
+                    b.Property<string>("DistrictCode1")
+                        .IsRequired()
+                        .HasColumnType("varchar");
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("full_name");
 
                     b.Property<string>("FullNameEn")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("full_name_en");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("name");
 
                     b.Property<string>("NameEn")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar")
                         .HasColumnName("name_en");
 
                     b.HasKey("Code");
 
                     b.HasIndex("AdministrativeUnitId");
 
+                    b.HasIndex("AdministrativeUnitId1");
+
                     b.HasIndex("DistrictCode");
 
-                    b.ToTable("wards");
+                    b.HasIndex("DistrictCode1");
+
+                    b.ToTable("wards", (string)null);
                 });
 
             modelBuilder.Entity("webapi.Models.VietnameseAdministrativeUnits.District", b =>
                 {
+                    b.HasOne("webapi.Models.VietnameseAdministrativeUnits.AdministrativeUnit", null)
+                        .WithMany("Districts")
+                        .HasForeignKey("AdministrativeUnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("webapi.Models.VietnameseAdministrativeUnits.AdministrativeUnit", "AdministrativeUnit")
                         .WithMany()
-                        .HasForeignKey("AdministrativeUnitId")
+                        .HasForeignKey("AdministrativeUnitId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("webapi.Models.VietnameseAdministrativeUnits.Province", null)
+                        .WithMany("Districts")
+                        .HasForeignKey("ProvinceCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("webapi.Models.VietnameseAdministrativeUnits.Province", "Province")
                         .WithMany()
-                        .HasForeignKey("ProvinceCode")
+                        .HasForeignKey("ProvinceCode1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -266,15 +308,27 @@ namespace webapi.Migrations
 
             modelBuilder.Entity("webapi.Models.VietnameseAdministrativeUnits.Province", b =>
                 {
-                    b.HasOne("webapi.Models.VietnameseAdministrativeUnits.AdministrativeRegion", "AdministrativeRegion")
+                    b.HasOne("webapi.Models.VietnameseAdministrativeUnits.AdministrativeRegion", null)
                         .WithMany("Provinces")
                         .HasForeignKey("AdministrativeRegionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("webapi.Models.VietnameseAdministrativeUnits.AdministrativeUnit", "AdministrativeUnit")
+                    b.HasOne("webapi.Models.VietnameseAdministrativeUnits.AdministrativeRegion", "AdministrativeRegion")
+                        .WithMany()
+                        .HasForeignKey("AdministrativeRegionId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("webapi.Models.VietnameseAdministrativeUnits.AdministrativeUnit", null)
                         .WithMany("Provinces")
                         .HasForeignKey("AdministrativeUnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("webapi.Models.VietnameseAdministrativeUnits.AdministrativeUnit", "AdministrativeUnit")
+                        .WithMany()
+                        .HasForeignKey("AdministrativeUnitId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -285,15 +339,27 @@ namespace webapi.Migrations
 
             modelBuilder.Entity("webapi.Models.VietnameseAdministrativeUnits.Ward", b =>
                 {
+                    b.HasOne("webapi.Models.VietnameseAdministrativeUnits.AdministrativeUnit", null)
+                        .WithMany("Wards")
+                        .HasForeignKey("AdministrativeUnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("webapi.Models.VietnameseAdministrativeUnits.AdministrativeUnit", "AdministrativeUnit")
                         .WithMany()
-                        .HasForeignKey("AdministrativeUnitId")
+                        .HasForeignKey("AdministrativeUnitId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("webapi.Models.VietnameseAdministrativeUnits.District", null)
+                        .WithMany("Wards")
+                        .HasForeignKey("DistrictCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("webapi.Models.VietnameseAdministrativeUnits.District", "District")
                         .WithMany()
-                        .HasForeignKey("DistrictCode")
+                        .HasForeignKey("DistrictCode1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -309,7 +375,21 @@ namespace webapi.Migrations
 
             modelBuilder.Entity("webapi.Models.VietnameseAdministrativeUnits.AdministrativeUnit", b =>
                 {
+                    b.Navigation("Districts");
+
                     b.Navigation("Provinces");
+
+                    b.Navigation("Wards");
+                });
+
+            modelBuilder.Entity("webapi.Models.VietnameseAdministrativeUnits.District", b =>
+                {
+                    b.Navigation("Wards");
+                });
+
+            modelBuilder.Entity("webapi.Models.VietnameseAdministrativeUnits.Province", b =>
+                {
+                    b.Navigation("Districts");
                 });
 #pragma warning restore 612, 618
         }
