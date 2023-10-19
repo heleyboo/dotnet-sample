@@ -76,12 +76,12 @@ public class AdministrativeDataContext: DbContext
             .HasColumnType("integer");
 
         modelBuilder.Entity<Ward>()
-            .HasOne<AdministrativeUnit>()
+            .HasOne<AdministrativeUnit>(x => x.AdministrativeUnit)
             .WithMany(a => a.Wards)
             .HasForeignKey(w => w.AdministrativeUnitId);
         
         modelBuilder.Entity<Ward>()
-            .HasOne<District>()
+            .HasOne<District>(w => w.District)
             .WithMany(d => d.Wards)
             .HasForeignKey(w => w.DistrictCode);
         
@@ -130,12 +130,12 @@ public class AdministrativeDataContext: DbContext
             .HasColumnType("integer");
 
         modelBuilder.Entity<District>()
-            .HasOne<AdministrativeUnit>()
+            .HasOne<AdministrativeUnit>(x => x.AdministrativeUnit)
             .WithMany(a => a.Districts)
             .HasForeignKey(d => d.AdministrativeUnitId);
         
         modelBuilder.Entity<District>()
-            .HasOne<Province>()
+            .HasOne<Province>(x => x.Province)
             .WithMany(p => p.Districts)
             .HasForeignKey(d => d.ProvinceCode);
         
@@ -179,7 +179,7 @@ public class AdministrativeDataContext: DbContext
             .HasColumnType("integer");
 
         modelBuilder.Entity<Province>()
-            .HasOne<AdministrativeUnit>()
+            .HasOne<AdministrativeUnit>(x => x.AdministrativeUnit)
             .WithMany(a => a.Provinces)
             .HasForeignKey(p => p.AdministrativeUnitId);
         
@@ -189,13 +189,17 @@ public class AdministrativeDataContext: DbContext
             .HasColumnType("integer");
         
         modelBuilder.Entity<Province>()
-            .HasOne<AdministrativeRegion>()
+            .HasOne<AdministrativeRegion>(x => x.AdministrativeRegion)
             .WithMany(p => p.Provinces)
             .HasForeignKey(p => p.AdministrativeRegionId);
-        
+
         modelBuilder.Entity<AdministrativeUnit>()
             .ToTable("administrative_units")
             .HasKey(p => p.Id);
+        
+        modelBuilder.Entity<AdministrativeUnit>()
+            .Property(p => p.Id)
+            .HasColumnName("id");
 
         modelBuilder.Entity<AdministrativeUnit>()
             .Property(p => p.FullName)
@@ -230,6 +234,10 @@ public class AdministrativeDataContext: DbContext
         modelBuilder.Entity<AdministrativeRegion>()
             .ToTable("administrative_regions")
             .HasKey(p => p.Id);
+        
+        modelBuilder.Entity<AdministrativeRegion>()
+            .Property(p => p.Id)
+            .HasColumnName("id");
 
         modelBuilder.Entity<AdministrativeRegion>()
             .Property(p => p.Name)
