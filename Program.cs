@@ -1,4 +1,6 @@
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
+using webapi.AutoMapper;
 using webapi.DbContext;
 using webapi.Services;
 using webapi.Services.Interfaces;
@@ -9,11 +11,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+;
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<AdministrativeDataContext>();
 builder.Services.AddTransient<IWardService, WardService>();
+builder.Services.AddAutoMapper(typeof(AdministrativeUnitProfile));
 
 // var loggerFactory = app.Services.GetService<ILoggerFactory>();
 // loggerFactory.AddFile(builder.Configuration["Logging:LogFilePath"].ToString());    

@@ -1,4 +1,6 @@
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using webapi.DataTransferObjects;
 using webapi.DbContext;
 using webapi.Models.VietnameseAdministrativeUnits;
 using webapi.Services.Interfaces;
@@ -16,6 +18,13 @@ public class WardService: IWardService
     
     public async Task<List<Ward>> GetWardsByDistrictCode(string districtCode)
     {
-        return await _context.Wards.Where(s => s.DistrictCode == districtCode).ToListAsync();
+        return await _context.Wards.Include(x => x.District).Where(s => s.DistrictCode == districtCode).ToListAsync();
+    }
+
+    public Ward? GetWardByCode(string code)
+    {
+        var ward = _context.Wards.Find(code);
+
+        return ward;
     }
 }
