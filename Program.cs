@@ -19,10 +19,6 @@ builder.Services.AddTransient<AdministrativeDataContext>();
 builder.Services.AddTransient<IWardService, WardService>();
 builder.Services.AddAutoMapper(typeof(AdministrativeUnitProfile));
 
-// var loggerFactory = app.Services.GetService<ILoggerFactory>();
-// loggerFactory.AddFile(builder.Configuration["Logging:LogFilePath"].ToString());    
-// loggerFactory.AddFile("Logs/myapp-{Date}.txt");
-
 Directory.CreateDirectory("Logs");
 
 builder.Logging.AddFile("Logs/myapp.txt");
