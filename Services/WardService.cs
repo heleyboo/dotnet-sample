@@ -27,4 +27,9 @@ public class WardService: IWardService
 
         return ward;
     }
+
+    public async Task<List<District>> GetAllDistricts()
+    {
+        return await _context.Districts.ToListAsync();
+    }
 }

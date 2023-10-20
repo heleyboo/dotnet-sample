@@ -8,4 +8,6 @@ public interface IWardService
     public Task<List<Ward>> GetWardsByDistrictCode(string districtCode);
 
     public Ward? GetWardByCode(string code);
+
+    public Task<List<District>> GetAllDistricts();
 }

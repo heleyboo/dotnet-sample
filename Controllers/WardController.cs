@@ -34,6 +34,12 @@ public class WardController : ControllerBase
     {
         _logger.LogInformation(districtCode);
         
-        return await MapperConfig.InitializeAutomapper().Map<Task<List<WardDto>>>(_wardService.GetWardsByDistrictCode(districtCode));
+        return await _mapper.Map<Task<List<WardDto>>>(_wardService.GetWardsByDistrictCode(districtCode));
+    }
+    
+    [HttpGet("/districts")]
+    public async Task<List<DistrictDto>> GetDistricts()
+    {
+        return await _mapper.Map<Task<List<DistrictDto>>>(_wardService.GetAllDistricts());
     }
 }

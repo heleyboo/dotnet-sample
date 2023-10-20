@@ -8,6 +8,10 @@ public class AdministrativeUnitProfile: Profile
 {
     public AdministrativeUnitProfile()
     {
-        CreateMap<Ward, WardDto>();
+        CreateMap<District, DistrictDto>();
+        CreateMap<Ward, WardDto>()
+            .ForMember(w => w.District, opt => opt.MapFrom(x => x.District));
+        CreateMap<Task<List<Ward>>, Task<List<WardDto>>>();
+        CreateMap<Task<List<District>>, Task<List<DistrictDto>>>();
     }
 }
