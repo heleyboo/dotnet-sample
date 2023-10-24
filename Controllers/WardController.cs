@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using webapi.DataTransferObjects;
+using webapi.Models.BoardNumber;
 using webapi.Models.VietnameseAdministrativeUnits;
 using webapi.Services.Interfaces;
 
@@ -16,11 +17,14 @@ public class WardController : ControllerBase
 
     private readonly IWardService _wardService;
     
-    public WardController(ILogger<PizzaController> logger, IWardService wardService, IMapper iMapper)
+    private readonly IGameUserService _gameUserService;
+    
+    public WardController(ILogger<PizzaController> logger, IWardService wardService, IMapper iMapper, IGameUserService gameUserService)
     {
         _logger = logger;
         _wardService = wardService;
         _mapper = iMapper;
+        _gameUserService = gameUserService;
     }
 
     [HttpGet("{code}")]
@@ -30,16 +34,23 @@ public class WardController : ControllerBase
     }
 
     [HttpGet("/wards")]
-    public async Task<List<WardDto>> GetWards([FromQuery(Name = "districtCode")] string districtCode)
+    public IEnumerable<WardDto> GetWards([FromQuery(Name = "districtCode")] string districtCode)
     {
         _logger.LogInformation(districtCode);
         
-        return await _mapper.Map<Task<List<WardDto>>>(_wardService.GetWardsByDistrictCode(districtCode));
+        return _mapper.Map<IEnumerable<WardDto>>(_wardService.GetWardsByDistrictCode(districtCode));
     }
     
     [HttpGet("/districts")]
     public async Task<List<DistrictDto>> GetDistricts()
     {
         return await _mapper.Map<Task<List<DistrictDto>>>(_wardService.GetAllDistricts());
+    }
+    
+    [HttpPost("/users")]
+    public GameUser Store(GameUser gameUser)
+    {
+        _logger.LogInformation(gameUser.Username);
+        return _gameUserService.CreateUser(gameUser);
     }
 }

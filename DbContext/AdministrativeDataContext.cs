@@ -1,4 +1,5 @@
-using MySql.Data.MySqlClient.X.XDevAPI.Common;
+
+using webapi.Models.BoardNumber;
 using webapi.Models.VietnameseAdministrativeUnits;
 
 namespace webapi.DbContext;
@@ -258,6 +259,74 @@ public class AdministrativeDataContext: DbContext
             .Property(p => p.CodeNameEn)
             .HasColumnName("code_name_en")
             .HasColumnType("varchar");
+        
+        modelBuilder.Entity<GameUser>()
+            .ToTable("game_users")
+            .HasKey(p => p.Id)
+            ;
+
+       
+        
+        modelBuilder.Entity<GameUser>()
+            .Property(p => p.Id)
+            .HasColumnName("id");
+
+        modelBuilder.Entity<GameUser>()
+            .Property(p => p.Username)
+            .HasColumnName("username")
+            .HasColumnType("varchar")
+            ;
+        
+        modelBuilder.Entity<GameUser>()
+            .Property(p => p.DeviceId)
+            .HasColumnName("device_id")
+            .HasColumnType("varchar")
+            ;
+        
+        modelBuilder.Entity<GameUser>()
+            .HasIndex(g => g.DeviceId)
+            .IsUnique();
+        
+        modelBuilder.Entity<Room>()
+            .ToTable("game_rooms")
+            .HasKey(p => p.Id);
+        
+        modelBuilder.Entity<Room>()
+            .Property(p => p.Id)
+            .HasColumnName("id");
+        
+        modelBuilder.Entity<Room>()
+            .Property(p => p.Code)
+            .HasColumnName("code");
+        
+        modelBuilder.Entity<Room>()
+            .HasIndex(g => g.Code)
+            .IsUnique();
+
+        modelBuilder.Entity<Room>()
+            .Property(p => p.Name)
+            .HasColumnName("name")
+            .HasColumnType("varchar");
+        
+        modelBuilder.Entity<Room>()
+            .Property(p => p.Board)
+            .HasColumnName("board")
+            .HasColumnType("text");
+        
+        modelBuilder.Entity<Room>()
+            .Property(p => p.FirstPlayerId)
+            .HasColumnName("first_player_id")
+            .HasColumnType("integer");
+        
+        modelBuilder.Entity<Room>()
+            .Property(p => p.SecondPlayerId)
+            .HasColumnName("second_player_id")
+            .HasColumnType("integer");
+        
+        modelBuilder.Entity<Room>()
+            .Property(p => p.BoardNumber)
+            .HasColumnName("game_board")
+            .HasColumnType("integer[]");
         
     }
 }

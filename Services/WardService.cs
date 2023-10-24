@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using webapi.DataTransferObjects;
 using webapi.DbContext;
 using webapi.Models.VietnameseAdministrativeUnits;
+using webapi.Repositories.Interfaces;
 using webapi.Services.Interfaces;
 
 namespace webapi.Services;
@@ -10,15 +11,18 @@ namespace webapi.Services;
 public class WardService: IWardService
 {
     private readonly AdministrativeDataContext _context;
+    
+    private readonly IUnitOfWork _unitOfWork;
 
-    public WardService(AdministrativeDataContext context)
+    public WardService(AdministrativeDataContext context, IUnitOfWork unitOfWork)
     {
         _context = context;
+        _unitOfWork = unitOfWork;
     }
     
-    public async Task<List<Ward>> GetWardsByDistrictCode(string districtCode)
+    public IEnumerable<Ward> GetWardsByDistrictCode(string districtCode)
     {
-        return await _context.Wards.Include(x => x.District).Where(s => s.DistrictCode == districtCode).ToListAsync();
+        return _unitOfWork.Ward.Find(s => s.DistrictCode == districtCode);
     }
 
     public Ward? GetWardByCode(string code)

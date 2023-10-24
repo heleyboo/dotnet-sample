@@ -2,6 +2,9 @@ using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using webapi.AutoMapper;
 using webapi.DbContext;
+using webapi.Hubs;
+using webapi.Repositories;
+using webapi.Repositories.Interfaces;
 using webapi.Services;
 using webapi.Services.Interfaces;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
@@ -16,8 +19,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<AdministrativeDataContext>();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<IWardService, WardService>();
+builder.Services.AddTransient<IGameUserService, GameUserService>();
 builder.Services.AddAutoMapper(typeof(AdministrativeUnitProfile));
+builder.Services.AddRazorPages();
+builder.Services.AddSignalR();
 
 Directory.CreateDirectory("Logs");
 
@@ -30,12 +37,19 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseExceptionHandler("/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 
 app.UseAuthorization();
-
+app.UseRouting();
 app.MapControllers();
+app.MapRazorPages();
+app.MapHub<ChatHub>("/chatHub");
+app.MapHub<GameHub>("/gameHub");
 
 app.Run();
