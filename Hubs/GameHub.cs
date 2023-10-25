@@ -19,9 +19,14 @@ public class GameHub : Hub
         await Clients.Group(roomCode).SendAsync("PlayerJoined", Context.ConnectionId);
 
         Room room = _unitOfWork.GameRoom.GetByCode(roomCode);
+        
         await Clients.Group(roomCode).SendAsync("GameData", room);
     }
 
+    public async Task OutRoom(string roomCode, string deviceId)
+    {
+        
+    }
     public async Task SendMove(string roomName, string move)
     {
         await Clients.Group(roomName).SendAsync("ReceiveMove", move);

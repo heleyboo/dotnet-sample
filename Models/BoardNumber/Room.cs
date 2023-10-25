@@ -17,6 +17,8 @@ public class Room
     public int? FirstPlayerId { get; set; }
     
     public int? SecondPlayerId { get; set; }
+    
+    public bool Playing { get; set; }
 
     public static Room CreateRandom(string roomName)
     {

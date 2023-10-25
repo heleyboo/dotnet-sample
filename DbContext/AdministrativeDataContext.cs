@@ -327,6 +327,62 @@ public class AdministrativeDataContext: DbContext
             .Property(p => p.BoardNumber)
             .HasColumnName("game_board")
             .HasColumnType("integer[]");
+
+        modelBuilder.Entity<GameData>().ToTable("game_data").HasKey(g => g.Id);
+        modelBuilder.Entity<GameData>()
+            .Property(p => p.RoomCode)
+            .HasColumnName("room_code")
+            .HasColumnType("varchar")
+            ;
+
+        modelBuilder.Entity<GameData>()
+            .Property(g => g.FirstPlayerId)
+            .HasColumnName("first_player_id")
+            .HasColumnType("varchar");
         
+        modelBuilder.Entity<GameData>()
+            .Property(g => g.SecondPlayerId)
+            .HasColumnName("second_player_id")
+            .HasColumnType("varchar");
+        
+        modelBuilder.Entity<GameData>()
+            .Property(g => g.WinnerId)
+            .HasColumnName("winner_id")
+            .HasColumnType("varchar");
+        
+        modelBuilder.Entity<GameData>()
+            .Property(g => g.FirstPlayerScore)
+            .HasDefaultValue(0)
+            .HasColumnName("first_player_score");
+        
+        modelBuilder.Entity<GameData>()
+            .Property(g => g.SecondPlayerScore)
+            .HasDefaultValue(0)
+            .HasColumnName("second_player_score");
+        
+        modelBuilder.Entity<GameData>()
+            .Property(g => g.AllPlayersReady)
+            .HasColumnName("all_players_ready")
+            .HasDefaultValue(false)
+            ;
+        
+        modelBuilder.Entity<GameData>()
+            .Property(g => g.GameMatrix)
+            .HasColumnName("game_matrix")
+            .HasColumnType("integer[]")
+            .HasDefaultValue(new List<int>())
+            ;
+        modelBuilder.Entity<GameData>()
+            .Property(g => g.FirstPlayerFound)
+            .HasColumnName("first_player_founds")
+            .HasColumnType("integer[]")
+            .HasDefaultValue(new List<int>())
+            ;
+        modelBuilder.Entity<GameData>()
+            .Property(g => g.SecondPlayerFound)
+            .HasColumnName("second_player_found")
+            .HasColumnType("integer[]")
+            .HasDefaultValue(new List<int>())
+            ;
     }
 }
