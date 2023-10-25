@@ -29,9 +29,10 @@ public class GameRoomController : ControllerBase
     }
     
     [HttpGet("/rooms")]
-    public IEnumerable<Room> GetAllRooms()
+    public RoomList GetAllRooms()
     {
-        return _unitOfWork.GameRoom.GetAll();
+        IEnumerable<Room> res = _unitOfWork.GameRoom.GetAll();
+        return new RoomList() { Rooms = res.ToList() };
     }
 
     [HttpPost("/rooms")]

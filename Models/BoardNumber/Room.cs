@@ -34,6 +34,11 @@ public class Room
     }
 }
 
+public class RoomList
+{
+    public List<Room> Rooms { get; set; }
+}
+
 public static class RandomNumberGenerator
 {
     public static string GenerateRandomNumberString(int numbers)

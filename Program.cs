@@ -26,6 +26,15 @@ builder.Services.AddAutoMapper(typeof(AdministrativeUnitProfile));
 builder.Services.AddRazorPages();
 builder.Services.AddSignalR();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+        });
+});
+
 Directory.CreateDirectory("Logs");
 
 builder.Logging.AddFile("Logs/myapp.txt");
@@ -51,5 +60,11 @@ app.MapControllers();
 app.MapRazorPages();
 app.MapHub<ChatHub>("/chatHub");
 app.MapHub<GameHub>("/gameHub");
+
+app.UseCors(x => x
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(origin => true) // allow any origin
+    .AllowCredentials()); // allow credentials
 
 app.Run();
